@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  customer_name: MyString
+  loan_amount: MyString
+  processing_fee: MyString
+  disbursement_date: 2021-01-07
+  rate_of_interest: MyString
+  term: 1
+  created_by: 1
+  updated_by: 1
+
+two:
+  customer_name: MyString
+  loan_amount: MyString
+  processing_fee: MyString
+  disbursement_date: 2021-01-07
+  rate_of_interest: MyString
+  term: 1
+  created_by: 1
+  updated_by: 1
