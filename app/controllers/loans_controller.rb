@@ -1,5 +1,6 @@
 class LoansController < ApplicationController
   before_action :set_loan, only: [:show, :edit, :update, :destroy]
+
   def index
   	@loans = Loan.all
   end
@@ -7,6 +8,7 @@ class LoansController < ApplicationController
   def new
   	@loan = Loan.new
   end
+
   def create
   	@loan = Loan.new(loan_params)
   	if @loan.save
@@ -19,6 +21,7 @@ class LoansController < ApplicationController
 
   def edit
   end
+
   def update
   	if @loan.update(loan_params)
   		flash[:notice] = "Customer data updated successfully."
@@ -40,8 +43,8 @@ class LoansController < ApplicationController
   	emi_amount = (@loan.loan_amount.to_f + total_loan_interest.to_i)/term
   	@loan.term.times do
   		loan_arr = []
-  	    interest_amount = ((remaining_amount.to_f/term)/100)*interest
-  	    principal_amount = emi_amount - interest_amount
+  	  interest_amount = ((remaining_amount.to_f/term)/100)*interest
+  	  principal_amount = emi_amount - interest_amount
   		loan_arr << loan_emi_start_date.next_month.beginning_of_month.strftime("%d/%m/%Y")
   		loan_arr << remaining_amount.round(2)
   		loan_arr << principal_amount.round(2)
@@ -55,7 +58,6 @@ class LoansController < ApplicationController
   		loan_emi_start_date = loan_emi_start_date.next_month.beginning_of_month
   	end
   end
-  
 
   def destroy
     if @loan.destroy
@@ -68,10 +70,11 @@ class LoansController < ApplicationController
 
   private
   def set_loan
-      @loan = Loan.find(params[:id])
+    @loan = Loan.find(params[:id])
   end
 
   def loan_params
   	params.require(:loan).permit!
   end
+
 end

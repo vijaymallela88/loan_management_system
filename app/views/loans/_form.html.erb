@@ -1,8 +1,10 @@
 <%= form_for @loan, :html => {id: "loan_id"} do |f| %>
+
   <div class="field">
     <%= f.label :customer_name %><br />
     <%= f.text_field :customer_name, autofocus: true, placeholder: "Customer Name" , :required => true%>
   </div>
+
   <div class="field">
     <%= f.label :loan_amount %><br />
     <%= f.number_field :loan_amount, autofocus: true, placeholder: "Loan Amount" , :required => true%>
@@ -12,34 +14,36 @@
     <%= f.label :rate_of_interest %><br />
     <%= f.number_field :rate_of_interest, autofocus: true, placeholder: "Interest Rate" , :required => true, :min => 1, :max => 100 %>%
   </div>
+
   <div class="field">
     <%= f.label :disbursement_date %><br />
     <%= f.date_field :disbursement_date, :value => Date.today, autofocus: true, :required => true%>
   </div>
+
   <div class="field">
     <%= f.label :term %><br />
     <%= f.number_field :term, in: 12..50, step: 12, autofocus: true, placeholder: "Term" , :required => true%>
   </div>
+
     <%= f.hidden_field :created_by, :value => session[:current_user_id]%>
     <%= f.hidden_field :updated_by, :value => session[:current_user_id]%>
-  
-  
+
   <br>
   <div class="actions">
     <%= f.submit "Save" %>
   </div>
+  
 <% end %>
 
 <script type="text/javascript">
-	
-  $(document).ready(function () {
-  $("#loan_id").validate({
-     debug: true,
-      rules: {
-      "loan[customer_name]": "required",
-      }
-      });
-});
 
+  $(document).ready(function () {
+    $("#loan_id").validate({
+       debug: true,
+       rules: {
+        "loan[customer_name]": "required",
+        }
+    });
+  });
 
 </script>
