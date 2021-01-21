@@ -33,7 +33,7 @@ class LoansController < ApplicationController
 
   def show
   	#(p x r x (1+r)**n)/((1+r)**(n-1))
-  	@loans = Loan.loan_details(@loan)
+  	@loans = @loan.loan_details
   	
   end
 
