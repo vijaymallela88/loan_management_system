@@ -1,13 +1,13 @@
 <p id="notice"><%= notice %></p>
-<% if @loans.present? %>
+<% if @loan.present? %>
 <h1>Monthly Loan Details</h1>
 <div class="row">
   <div style="width:25%; float: left;">
-  	<h4>Customer Name : <%= @loan.customer_name%></h4>
-  	<h4>Loan Amount : <%= @loan.loan_amount%></h4>
-  	<h4>Interest Rate : <%= @loan.rate_of_interest %>%</h4>
-  	<h4>Disbursement Date : <%= @loan.disbursement_date.strftime("%d/%m/%Y")%></h4>
-    <h4>Payment Start Date : <%= @loan.disbursement_date.next_month.beginning_of_month.strftime("%d/%m/%Y") %></h4>
+  	<h4>Customer Name : <%= @loan['customer_name'] %></h4>
+  	<h4>Loan Amount : <%= @loan['loan_amount'] %></h4>
+  	<h4>Interest Rate : <%= @loan['interest_rate'] %>%</h4>
+  	<h4>Disbursement Date : <%= @loan['disbursement_date'] %></h4>
+    <h4>Payment Start Date : <%= @loan['payment_start_date'] %></h4>
   </div>
   <div style="width:75%; float: right;">
   <table>
@@ -23,7 +23,7 @@
     </thead>
 
     <tbody>
-      <% @loans.each do |loan| %>
+      <% @loan['loan_details'].each do |loan| %>
         <tr>
         	<% loan.each do |data| %>
             <td><%= data %></td>

@@ -1,8 +1,9 @@
 class LoansController < ApplicationController
-  before_action :set_loan, only: [:show, :edit, :update, :destroy]
+  before_action :set_loan, only: [:edit, :update, :destroy]
+  before_action :resources, only: [:index, :show]
 
   def index
-  	@loans = Loan.all
+  	@loans = resources
   end
 
   def new
@@ -16,7 +17,7 @@ class LoansController < ApplicationController
   	else
   		flash[:alert] = "Something went wrong!"
   	end
-  		redirect_to loans_path
+  	redirect_to loans_path
   end
 
   def edit
@@ -32,9 +33,7 @@ class LoansController < ApplicationController
   end
 
   def show
-  	#(p x r x (1+r)**n)/((1+r)**(n-1))
-  	@loans = @loan.loan_details
-  	
+  	@loan = resources
   end
 
   def destroy
@@ -43,16 +42,20 @@ class LoansController < ApplicationController
     else
     	flash[:alert] = "Something went wrong!"
     end
-  		redirect_to loans_path
+  	redirect_to loans_path
   end
 
   private
+
   def set_loan
     @loan = Loan.find(params[:id])
+  end
+
+  def resources
+    LoanQuery.call(Loan.all, params)
   end
 
   def loan_params
   	params.require(:loan).permit!
   end
-
 end
